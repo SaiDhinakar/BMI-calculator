@@ -1,0 +1,45 @@
+*{
+  border: 0;
+  padding: 0;
+  font-family:'Courier New', Courier, monospace
+}
+
+body{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #E2E5EC;
+}
+
+.contanier{
+  width: 700px;
+  display: flex;
+  background-color: #fff;
+}
+
+label{
+  margin: 10px;
+  padding: 5px;
+}
+
+.data{
+  flex:1;
+}
+
+.data h2{
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#height, 
+#weight{
+  margin: 10px;
+  padding: 10px;
+  display: block;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
