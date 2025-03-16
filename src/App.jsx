@@ -6,37 +6,43 @@ function App() {
   const [weight, setWeight] = useState("");
   const [BMI, setBMI] = useState("");
   const [error, setError] = useState("");
+  const [BmiStatus, setBmiStatus] = useState("");
 
   const calculateBMI = () => {
-    // Reset error and BMI states
     setError("");
     setBMI("");
 
-    // Check if inputs are empty
     if (!height || !weight) {
       setError("Please enter both height and weight");
       return;
     }
 
-    // Check if inputs are valid numbers
     if (height <= 0 || weight <= 0) {
       setError("Height and weight must be greater than 0");
       return;
     }
 
     try {
-      // Convert height to meters (assuming input is in cm)
       const heightInMeters = height / 100;
-      // Calculate BMI
       const bmiValue = (weight / (heightInMeters * heightInMeters)).toFixed(2);
+      setBMI(bmiValue);
+
+      if (bmiValue < 18.5){
+        setBmiStatus("Underweight");
+      }else if(bmiValue >= 18.5 && bmiValue < 24.9){
+        setBmiStatus("Normal Weight");
+      }else if(bmiValue >= 25 && bmiValue < 29.9){
+        setBmiStatus("Overweight");
+      }else{
+        setBmiStatus("Obese")
+      }
+
       
-      // Check if the result is a valid number
       if (isNaN(bmiValue) || !isFinite(bmiValue)) {
         setError("Invalid calculation result");
         return;
       }
 
-      setBMI(bmiValue);
     } catch (err) {
       setError("An error occurred during calculation");
     }
@@ -74,7 +80,12 @@ function App() {
             onChange={(e) => handleInput(e, setWeight)}
           />
           <button onClick={calculateBMI}>Calculate</button>
-          {BMI && <p id="result">Your BMI value is {BMI}</p>}
+          {BMI && (
+            <div className="result">
+              <p>Your BMI value is {BMI}</p>
+              <p>Status : {BmiStatus}</p>
+            </div>
+          )}
         </div>
       </div>
     </>
